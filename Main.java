@@ -11,10 +11,11 @@ public class Main {
             System.out.println("1. Tambah Lagu ke Playlist");
             System.out.println("2. Hapus Lagu dari Playlist");
             System.out.println("3. Tampilkan Playlist");
-            System.out.println("4. Keluar");
+            System.out.println("4. Edit Urutan Lagu di Playlist");
+            System.out.println("5. Keluar");
             System.out.print("Masukkan pilihan: ");
             pilihan = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine();  // Clear the buffer
 
             switch (pilihan) {
                 case 1:
@@ -22,7 +23,7 @@ public class Main {
                     String namaPlaylist = scanner.nextLine();
                     System.out.print("Tambah berapa lagu? ");
                     int jumlah = scanner.nextInt();
-                    scanner.nextLine();
+                    scanner.nextLine();  // Clear the buffer
 
                     for (int i = 1; i <= jumlah; i++) {
                         System.out.print("Masukkan nama lagu ke-" + i + ": ");
@@ -35,28 +36,60 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Masukkan nama playlist: ");
+                    System.out.println("Daftar Playlist:");
+                    if (inventory.tampilkanSemuaPlaylist() == 0) {
+                        System.out.println("Tidak ada playlist yang tersedia, kembali ke menu utama.");
+                        break;
+                    }
+                    System.out.print("Masukkan nama playlist yang ingin diedit: ");
                     namaPlaylist = scanner.nextLine();
-                    System.out.print("Masukkan nama lagu yang ingin dihapus: ");
-                    String laguHapus = scanner.nextLine();
-                    inventory.hapusLaguDariPlaylist(namaPlaylist, laguHapus);
+                    inventory.tampilkanPlaylist(namaPlaylist);
+
+                    System.out.print("Masukkan nomor lagu yang ingin dihapus: ");
+                    int noLaguHapus = scanner.nextInt();
+                    scanner.nextLine();  // Clear the buffer
+                    inventory.hapusLaguDariPlaylist(namaPlaylist, noLaguHapus - 1);
                     System.out.println("Lagu berhasil dihapus (jika ditemukan).");
                     break;
 
                 case 3:
+                    System.out.println("Daftar Playlist:");
+                    if (inventory.tampilkanSemuaPlaylist() == 0) {
+                        System.out.println("Tidak ada playlist yang tersedia, kembali ke menu utama.");
+                        break;
+                    }
                     System.out.print("Masukkan nama playlist yang ingin ditampilkan: ");
                     namaPlaylist = scanner.nextLine();
                     inventory.tampilkanPlaylist(namaPlaylist);
                     break;
 
                 case 4:
+                    System.out.println("Daftar Playlist:");
+                    if (inventory.tampilkanSemuaPlaylist() == 0) {
+                        System.out.println("Tidak ada playlist yang tersedia, kembali ke menu utama.");
+                        break;
+                    }
+                    System.out.print("Masukkan nama playlist yang ingin diedit: ");
+                    namaPlaylist = scanner.nextLine();
+                    inventory.tampilkanPlaylist(namaPlaylist);
+
+                    System.out.print("Masukkan nomor lagu yang ingin dipindah: ");
+                    int dari = scanner.nextInt();
+                    System.out.print("Masukkan nomor posisi baru: ");
+                    int ke = scanner.nextInt();
+                    scanner.nextLine();  // Clear the buffer
+                    inventory.ubahUrutanLagu(namaPlaylist, dari - 1, ke - 1);
+                    System.out.println("Urutan lagu berhasil diubah.");
+                    break;
+
+                case 5:
                     System.out.println("Keluar dari program.");
                     break;
 
                 default:
                     System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             }
-        } while (pilihan != 4);
+        } while (pilihan != 5);
 
         scanner.close();
     }
