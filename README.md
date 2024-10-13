@@ -8,4 +8,4 @@ Tugas Asistensi 1 PBO G 2024 (Kelompok 6)
 | Ahmad Zaky Ash Shidqi | 5025231229 | PBO (G) |
 
 Gambar di BlueJ :
-![image](https://github.com/user-attachments/assets/4cb7863d-62ea-49bb-ac9c-3b4853875928)
+![image](https://github.com/user-attachments/assets/76b456ea-8d22-4f85-9a75-f9b5bbbfce26)
