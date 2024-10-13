@@ -1,5 +1,5 @@
 public interface Storable {
-    void tambahLagu(String lagu, String artis);
-    void hapusLagu(String lagu);
-    void tampilkanLagu();
+    void tambahLaguKePlaylist(String namaPlaylist, String lagu, String artis);
+    void hapusLaguDariPlaylist(String namaPlaylist, String lagu);
+    void tampilkanPlaylist(String namaPlaylist);
 }
