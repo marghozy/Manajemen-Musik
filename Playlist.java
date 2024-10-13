@@ -14,8 +14,12 @@ public class Playlist {
         laguList.add(lagu);
     }
 
-    public void hapusLagu(String namaLagu) {
-        laguList.removeIf(lagu -> lagu.getNama().equalsIgnoreCase(namaLagu));
+    public void hapusLagu(int indexLagu) {
+        if (indexLagu >= 0 && indexLagu < laguList.size()) {
+            laguList.remove(indexLagu);
+        } else {
+            System.out.println("Nomor lagu tidak valid.");
+        }
     }
 
     public void tampilkanLagu() {
@@ -23,9 +27,20 @@ public class Playlist {
             System.out.println("Playlist kosong.");
         } else {
             System.out.println("Daftar Lagu dalam Playlist '" + namaPlaylist + "':");
+            int index = 1;
             for (Song song : laguList) {
-                System.out.println("Lagu: " + song.getNama() + ", Artis: " + song.getArtis());
+                System.out.println(index + ". Lagu: " + song.getNama() + ", Artis: " + song.getArtis());
+                index++;
             }
+        }
+    }
+
+    public void ubahUrutan(int dari, int ke) {
+        if (dari >= 0 && dari < laguList.size() && ke >= 0 && ke < laguList.size()) {
+            Song lagu = laguList.remove(dari);
+            laguList.add(ke, lagu);
+        } else {
+            System.out.println("Posisi tidak valid.");
         }
     }
 
