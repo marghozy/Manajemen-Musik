@@ -27,7 +27,10 @@ public class Main {
                         String namaLagu = scanner.nextLine();
                         System.out.print("Masukkan nama artis untuk lagu \"" + namaLagu + "\": ");
                         String namaArtis = scanner.nextLine();
-                        inventory.tambahLagu(namaLagu, namaArtis);
+                        System.out.print("Masukkan tahun rilis untuk lagu \"" + namaLagu + "\": ");
+                        int tahunRilis = scanner.nextInt();
+                        scanner.nextLine();
+                        inventory.tambahLagu(namaLagu, namaArtis, tahunRilis);
                     }
                     System.out.println("Lagu berhasil ditambahkan!");
                     break;
@@ -46,7 +49,34 @@ public class Main {
                     break;
 
                 case 3:
-                    inventory.tampilkanLagu();
+                    System.out.println("Tampilkan lagu berdasarkan:");
+                    System.out.println("A. Tahun rilis");
+                    System.out.println("B. Artis/Penyanyi");
+                    System.out.println("C. Tampilkan Semua lagu");
+                    System.out.print("Masukkan pilihan (A/B/C): ");
+                    String subPilihan = scanner.nextLine().toUpperCase();
+
+                    switch (subPilihan) {
+                        case "A":
+                            System.out.print("Masukkan tahun rilis: ");
+                            int tahun = scanner.nextInt();
+                            scanner.nextLine();
+                            inventory.tampilkanLaguBerdasarkanTahun(tahun);
+                            break;
+
+                        case "B":
+                            System.out.print("Masukkan nama artis: ");
+                            String artis = scanner.nextLine();
+                            inventory.tampilkanLaguBerdasarkanArtis(artis);
+                            break;
+
+                        case "C":
+                            inventory.tampilkanLagu();
+                            break;
+
+                        default:
+                            System.out.println("Pilihan tidak valid.");
+                    }
                     break;
 
                 case 4:
