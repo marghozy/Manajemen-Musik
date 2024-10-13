@@ -19,10 +19,10 @@ public class Inventory implements Storable {
     }
 
     @Override
-    public void hapusLaguDariPlaylist(String namaPlaylist, String lagu) {
+    public void hapusLaguDariPlaylist(String namaPlaylist, int indexLagu) {
         Playlist playlist = playlistMap.get(namaPlaylist);
         if (playlist != null) {
-            playlist.hapusLagu(lagu);
+            playlist.hapusLagu(indexLagu);
         } else {
             System.out.println("Playlist tidak ditemukan.");
         }
@@ -33,6 +33,26 @@ public class Inventory implements Storable {
         Playlist playlist = playlistMap.get(namaPlaylist);
         if (playlist != null) {
             playlist.tampilkanLagu();
+        } else {
+            System.out.println("Playlist tidak ditemukan.");
+        }
+    }
+
+    public int tampilkanSemuaPlaylist() {
+        if (playlistMap.isEmpty()) {
+            return 0;  // Indikasi tidak ada playlist
+        } else {
+            for (String namaPlaylist : playlistMap.keySet()) {
+                System.out.println(namaPlaylist);
+            }
+            return 1;  // Indikasi ada playlist
+        }
+    }
+
+    public void ubahUrutanLagu(String namaPlaylist, int dari, int ke) {
+        Playlist playlist = playlistMap.get(namaPlaylist);
+        if (playlist != null) {
+            playlist.ubahUrutan(dari, ke);
         } else {
             System.out.println("Playlist tidak ditemukan.");
         }
