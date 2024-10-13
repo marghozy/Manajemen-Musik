@@ -2,44 +2,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory implements Storable {
-    private Map<String, Song> laguMap;
-    private int totalLagu;
+    private Map<String, Playlist> playlistMap;
 
     public Inventory() {
-        laguMap = new HashMap<>();
-        totalLagu = 0;
+        playlistMap = new HashMap<>();
     }
 
     @Override
-    public void tambahLagu(String lagu, String artis) {
-        if (!laguMap.containsKey(lagu)) {
-            laguMap.put(lagu, new Song(lagu, artis));
-            totalLagu++;
+    public void tambahLaguKePlaylist(String namaPlaylist, String lagu, String artis) {
+        Playlist playlist = playlistMap.get(namaPlaylist);
+        if (playlist == null) {
+            playlist = new Playlist(namaPlaylist);
+            playlistMap.put(namaPlaylist, playlist);
+        }
+        playlist.tambahLagu(new Song(lagu, artis));
+    }
+
+    @Override
+    public void hapusLaguDariPlaylist(String namaPlaylist, String lagu) {
+        Playlist playlist = playlistMap.get(namaPlaylist);
+        if (playlist != null) {
+            playlist.hapusLagu(lagu);
         } else {
-            System.out.println("Lagu sudah ada di koleksi.");
+            System.out.println("Playlist tidak ditemukan.");
         }
     }
 
     @Override
-    public void hapusLagu(String lagu) {
-        if (laguMap.containsKey(lagu)) {
-            laguMap.remove(lagu);
-            totalLagu--;
+    public void tampilkanPlaylist(String namaPlaylist) {
+        Playlist playlist = playlistMap.get(namaPlaylist);
+        if (playlist != null) {
+            playlist.tampilkanLagu();
         } else {
-            System.out.println("Lagu tidak ditemukan.");
-        }
-    }
-
-    @Override
-    public void tampilkanLagu() {
-        if (laguMap.isEmpty()) {
-            System.out.println("Tidak ada lagu dalam koleksi.");
-        } else {
-            System.out.println("Daftar Lagu:");
-            for (Song song : laguMap.values()) {
-                System.out.println("Lagu: " + song.getNama() + ", Artis: " + song.getArtis());
-            }
-            System.out.println("Total Lagu: " + totalLagu);
+            System.out.println("Playlist tidak ditemukan.");
         }
     }
 }
